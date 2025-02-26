@@ -1,13 +1,55 @@
 import { useState } from "react";
 import axios from "axios";
 import { Link, Navigate } from "react-router-dom";
+import { useGoogleLogin } from "@react-oauth/google";
 import { useNavigate } from "react-router-dom";
+
 
 const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState("");
     const navigate = useNavigate();
+
+    const login = useGoogleLogin({
+        onSuccess: async (tokenResponse) => {
+            try {
+                console.log("hello");
+
+                // Fetch user info from Google API
+                const res = await axios.get(
+                    "https://www.googleapis.com/oauth2/v3/userinfo",
+                    {
+                        headers: { Authorization: `Bearer ${tokenResponse.access_token}` },
+                    }
+                );
+
+                const { sub, name, email } = res.data;
+
+                // Send user data to backend
+                const backendRes = await axios.post(
+                    "http://localhost:5000/api/auth/google",
+                    {
+                        google_id: sub,
+                        name,
+                        email,
+                    },
+                    {
+                        headers: { "Content-Type": "application/json" },
+                    }
+                );
+
+                const token = backendRes.data.token;
+                // console.log("Soham:",backendRes.data)
+                localStorage.setItem("token", token);
+                localStorage.setItem("user", backendRes.data.user);
+                window.location.href = "/dashboard";
+            } catch (error) {
+                console.error("Google login failed:", error);
+            }
+        },
+    });
+
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -39,6 +81,11 @@ const Login = () => {
                         Login
                     </button>
                 </form>
+                <div className="flex justify-center items-center mt-3">
+                <button onClick={() => login()} className="bg-blue-500 text-white px-4 py-2">
+                    Sign in with Google
+                </button>
+                </div>
                 <p className="text-center mt-4">
                     Don't have an account? <Link to="/register" className="text-blue-500 hover:underline">Sign Up</Link>
                 </p>

@@ -5,6 +5,9 @@ import Dashboard from "./components/Dashboard";
 import Expenses from "./components/Expenses";
 import Income from "./components/Income";
 import BudgetGoalsTracker from "./components/Budget";
+import { GoogleOAuthProvider } from "@react-oauth/google";
+
+const GOOGLE_CLIENT_ID = "140143509369-kae63f2pnndpdtl22diob5gm6dnnn4r8.apps.googleusercontent.com";
 
 // Protected Route Component
 const ProtectedRoute = ({ element }) => {
@@ -15,6 +18,7 @@ const ProtectedRoute = ({ element }) => {
 
 function App() {
   return (
+    <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
     <Router>
       <Routes>
         <Route path="/" element={<Login />} />
@@ -27,6 +31,7 @@ function App() {
         <Route path="/budget" element={<ProtectedRoute element={<BudgetGoalsTracker />} />} />
       </Routes>
     </Router>
+    </GoogleOAuthProvider>
   );
 }
 

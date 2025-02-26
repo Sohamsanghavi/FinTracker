@@ -2,11 +2,11 @@ const { Pool } = require('pg');
 require('dotenv').config(); // Load environment variables from .env file
 
 const pool = new Pool({
-    user:process.env.DB_USER,
-    host:process.env.DB_HOST,
+    user: process.env.DB_USER,
+    host: process.env.DB_HOST,
     database: process.env.DB_NAME,
-    password:process.env.DB_PASSWORD,
-    port:process.env.DB_PORT
+    password: process.env.DB_PASSWORD,
+    port: process.env.DB_PORT
 });
 
 // pool.on('connect', () => {
@@ -16,6 +16,7 @@ const createUserTable = async () => {
     const query = `
     CREATE TABLE IF NOT EXISTS users (
       id SERIAL PRIMARY KEY,
+      google_id VARCHAR(255),
       name VARCHAR(100) NOT NULL,
       email VARCHAR(100) UNIQUE NOT NULL,
       password VARCHAR(255) NOT NULL,

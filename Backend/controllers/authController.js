@@ -2,6 +2,7 @@ const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const pool = require('../db/db');
+const passport = require("passport");
 require('dotenv').config();
 
 const router = express.Router();
@@ -51,5 +52,41 @@ router.post('/login', async (req, res) => {
         res.status(500).json({ error: "Server error" });
     }
 });
+
+router.get("/google", passport.authenticate("google", { scope: ["profile", "email"] }));
+router.post("/google", async (req, res) => {
+    const { google_id, name, email } = req.body;
+
+    try {
+        // Check if user already exists in the database
+        let user = await pool.query("SELECT * FROM users WHERE google_id = $1", [google_id]);
+
+        if (user.rows.length === 0) {
+            // Insert new user if not found
+            user = await pool.query(
+                "INSERT INTO users (google_id, email, name) VALUES ($1, $2, $3) RETURNING *",
+                [google_id, email, name]
+            );
+        }
+
+        // Generate JWT token
+        const token = jwt.sign({ id: user.rows[0].id }, process.env.JWT_SECRET, { expiresIn: "1h" });
+
+        res.json({ token, user: user.rows[0].id });
+    } catch (error) {
+        console.error("Error during authentication:", error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+});
+
+// Google OAuth callback
+router.get(
+    "/google/callback",
+    passport.authenticate("google", { failureRedirect: "/login", session: false }),
+    (req, res) => {
+        const token = req.user.token;
+        res.redirect(`http://localhost:5173/dashboard?token=${token}`);
+    }
+);
 
 module.exports = router;

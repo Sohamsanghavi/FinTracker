@@ -6,11 +6,16 @@ export default function BudgetPage({ userId }) {
     const [budgets, setBudgets] = useState([]);
     const [category, setCategory] = useState("");
     const [amount, setAmount] = useState("");
-    const [user, setUser] = useState(localStorage.getItem("user"))
+    const [user, setUser] = useState(localStorage.getItem("user"));
+    const [emailSent, setEmailSent] = useState(false);
 
     useEffect(() => {
         fetchBudgets();
     }, []);
+
+    useEffect(() => {
+        checkBudgetOverrun();
+    }, [budgets]);
 
     const fetchBudgets = async () => {
         try {
@@ -31,6 +36,22 @@ export default function BudgetPage({ userId }) {
             setAmount("");
         } catch (error) {
             console.error("Error setting budget:", error);
+        }
+    };
+
+    const checkBudgetOverrun = async () => {
+        if (emailSent) return; // Prevent multiple emails
+
+        const overBudget = budgets.find((b) => parseFloat(b.spent) > parseFloat(b.budget_amount));
+        console.log("over", overBudget);
+        if (overBudget) {
+            try {
+                await axios.post("/api/budget/notify", { user_id: user, category: overBudget.category });
+                setEmailSent(true);
+                console.log("Budget overrun email sent!");
+            } catch (error) {
+                console.error("Error sending budget notification:", error);
+            }
         }
     };
 
@@ -71,14 +92,14 @@ export default function BudgetPage({ userId }) {
                                     <span className="text-sm">{b.spent} / {b.budget_amount}</span>
                                 </div>
                                 <div className="w-full bg-gray-200 h-4 rounded-lg mt-1">
-                                    {progress>100?<div
+                                    {progress > 100 ? <div
                                         className="h-4 bg-red-500 rounded-lg"
                                         style={{ width: `100%` }}
                                     ></div> : <div
                                         className="h-4 bg-green-500 rounded-lg"
                                         style={{ width: `${progress}%` }}
                                     ></div>}
-                                    
+
                                 </div>
                             </li>
                         );
