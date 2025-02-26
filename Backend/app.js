@@ -11,10 +11,12 @@ const sourceRoutes = require('./controllers/sourceController');
 const summaryRoutes = require('./controllers/summaryController');
 const budgetRoutes = require('./controllers/budgetContoller')
 
+const url=process.env.NODE_ENV=='dev'? "http://localhost:5173":"";
+
 const app = express();
 app.use(
     cors({
-        origin: "http://localhost:5173", // Allow your frontend origin
+        origin: url, // Allow your frontend origin
         methods: "GET, POST, PUT, DELETE",
         credentials: true, // Allow cookies/session sharing
     })
