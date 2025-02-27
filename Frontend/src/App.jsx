@@ -6,6 +6,7 @@ import Expenses from "./components/Expenses";
 import Income from "./components/Income";
 import BudgetGoalsTracker from "./components/Budget";
 import { GoogleOAuthProvider } from "@react-oauth/google";
+import SplitExpenseManager from "./components/Split";
 
 const GOOGLE_CLIENT_ID = "140143509369-kae63f2pnndpdtl22diob5gm6dnnn4r8.apps.googleusercontent.com";
 
@@ -29,6 +30,7 @@ function App() {
         <Route path="/income" element={<ProtectedRoute element={<Income />} />} />
         <Route path="/expenses" element={<ProtectedRoute element={<Expenses />} />} />
         <Route path="/budget" element={<ProtectedRoute element={<BudgetGoalsTracker />} />} />
+        <Route path="/split" element={<ProtectedRoute element={<SplitExpenseManager />} />} />
       </Routes>
     </Router>
     </GoogleOAuthProvider>

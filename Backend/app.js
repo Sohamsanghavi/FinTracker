@@ -12,9 +12,10 @@ const authRoutes = require('./controllers/authController');
 const transactionRoutes = require('./controllers/transactionController');
 const sourceRoutes = require('./controllers/sourceController');
 const summaryRoutes = require('./controllers/summaryController');
-const budgetRoutes = require('./controllers/budgetContoller')
+const budgetRoutes = require('./controllers/budgetContoller');
+const splitRoutes = require('./controllers/splitController');
 
-const url = process.env.NODE_ENV == 'dev' ? "http://localhost:5000" :"https://fj-be-r2-soham-sanghavi-iiitp-1.onrender.com/";
+const url = process.env.NODE_ENV === "dev1" ? "http://localhost:5000" :"https://fj-be-r2-soham-sanghavi-iiitp-1.onrender.com";
 
 const app = express();
 
@@ -42,6 +43,7 @@ app.use('/api/transactions', transactionRoutes);
 app.use('/api/source', sourceRoutes);
 app.use('/api/summary', summaryRoutes);
 app.use('/api/budget', budgetRoutes);
+app.use('/api/splits',splitRoutes);
 
 app.get("*",(req,res)=>{
     res.sendFile(path.resolve(_dirname,"Frontend","dist","index.html"));

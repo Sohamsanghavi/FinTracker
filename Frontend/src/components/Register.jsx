@@ -3,6 +3,8 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
+const url = process.env.NODE_ENV == 'dev1' ? "http://localhost:5000" : "https://fj-be-r2-soham-sanghavi-iiitp-1.onrender.com";
+
 const Register = () => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -14,7 +16,7 @@ const Register = () => {
         e.preventDefault();
 
         try {
-            const response = await axios.post("https://fj-be-r2-soham-sanghavi-iiitp-1.onrender.com/api/auth/register", {
+            const response = await axios.post(`${url}/api/auth/register`, {
                 name,
                 email,
                 password,

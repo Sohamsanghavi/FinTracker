@@ -5,7 +5,7 @@ import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } fro
 import { useNavigate } from "react-router-dom";
 import Layout from "./HomePage";
 // Configure axios defaults
-axios.defaults.baseURL = "https://fj-be-r2-soham-sanghavi-iiitp-1.onrender.com";
+axios.defaults.baseURL = process.env.NODE_ENV == 'dev1' ? "http://localhost:5000" : "https://fj-be-r2-soham-sanghavi-iiitp-1.onrender.com";
 
 const Dashboard = () => {
     const [transactions, setTransactions] = useState([]);
@@ -28,7 +28,7 @@ const Dashboard = () => {
 
     const [incomeSources, setIncomeSources] = useState([]);
     const [expenseSources, setExpenseSources] = useState([]);
-    const [category,setCategory]=useState([]);
+    const [category, setCategory] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [isAddingSource, setIsAddingSource] = useState(false);
     const [newSource, setNewSource] = useState("");
@@ -135,7 +135,7 @@ const Dashboard = () => {
 
         try {
             const endpoint = formData.type === "income" ? "/api/source/income-sources" : "/api/source/expense-sources";
-            const response = await axios.post(endpoint, { name: newSource, user: user ,category:category });
+            const response = await axios.post(endpoint, { name: newSource, user: user, category: category });
 
             if (formData.type === "income") {
                 setIncomeSources([...incomeSources, response.data]);
@@ -320,8 +320,8 @@ const Dashboard = () => {
                                             value={newSource}
                                             onChange={(e) => setNewSource(e.target.value)}
                                         />
-                                        
-                                        
+
+
 
                                         <div className="flex justify-end gap-2">
                                             <button

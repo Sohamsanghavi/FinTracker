@@ -96,6 +96,27 @@ const createBudgetTable = async () => {
     }
 };
 
+const createSplitExpenseTable = async () => {
+    const query = `
+    CREATE TABLE IF NOT EXISTS split_expenses (
+      split_id SERIAL PRIMARY KEY,
+      split_from_user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      split_to_user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      amount DECIMAL(12,2) NOT NULL,
+      is_settled BOOLEAN DEFAULT FALSE,
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
+  `;
+
+    try {
+        await pool.query(query);
+        console.log("✅ SplitExpense table created successfully!");
+    } catch (error) {
+        console.error("❌ Error creating SplitExpense table:", error);
+    }
+};
+
+
 
 // Create Transaction Table
 const createTransactionTable = async () => {
@@ -136,5 +157,6 @@ createExpenseSourceTable();
 createTransactionTable();
 createTransactionTable();
 createBudgetTable();
+createSplitExpenseTable();
 
 module.exports = pool;

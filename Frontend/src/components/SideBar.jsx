@@ -38,6 +38,11 @@ const Sidebar = () => {
             text: "Budget",
             icon: <MoneyOff />,
             path: "/budget"
+        },
+        {
+            text:"Split",
+            icon: <MoneyOff />,
+            path: "/split"
         }
     ];
 

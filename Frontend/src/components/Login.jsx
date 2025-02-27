@@ -11,6 +11,8 @@ const Login = () => {
     const [message, setMessage] = useState("");
     const navigate = useNavigate();
 
+    const url = process.env.NODE_ENV == 'dev1' ? "http://localhost:5000" : "https://fj-be-r2-soham-sanghavi-iiitp-1.onrender.com";
+
     const login = useGoogleLogin({
         onSuccess: async (tokenResponse) => {
             try {
@@ -28,7 +30,7 @@ const Login = () => {
 
                 // Send user data to backend
                 const backendRes = await axios.post(
-                    "https://fj-be-r2-soham-sanghavi-iiitp-1.onrender.com/api/auth/google",
+                    `${url}/api/auth/google`,
                     {
                         google_id: sub,
                         name,
@@ -55,7 +57,7 @@ const Login = () => {
         e.preventDefault();
 
         try {
-            const response = await axios.post("https://fj-be-r2-soham-sanghavi-iiitp-1.onrender.com/api/auth/login", {
+            const response = await axios.post(`${url}/api/auth/login`, {
                 email,
                 password,
             });
