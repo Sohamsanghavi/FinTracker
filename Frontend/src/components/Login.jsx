@@ -16,7 +16,7 @@ const Login = () => {
     const login = useGoogleLogin({
         onSuccess: async (tokenResponse) => {
             try {
-                console.log("hello");
+                // console.log("hello");
 
                 // Fetch user info from Google API
                 const res = await axios.get(

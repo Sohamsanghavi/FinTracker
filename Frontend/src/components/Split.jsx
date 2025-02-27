@@ -31,7 +31,7 @@ const SplitExpenseManager = () => {
                 ]);
 
                 // Filter out current user from users list
-                console.log(usersRes);
+                // console.log(usersRes);
                 setUsers(usersRes.data.filter(user => user.id != currentUserId));
                 setCategories(categoriesRes.data);
                 setOwedSplits(owedRes.data);

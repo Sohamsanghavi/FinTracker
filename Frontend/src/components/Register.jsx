@@ -24,7 +24,7 @@ const Register = () => {
             setMessage(response.data.message);
             navigate('/')
         } catch (error) {
-            console.log(error.response)
+            // console.log(error.response)
             setMessage(error.response?.data?.error || "Registration failed");
         }
     };
