@@ -14,7 +14,7 @@ const sourceRoutes = require('./controllers/sourceController');
 const summaryRoutes = require('./controllers/summaryController');
 const budgetRoutes = require('./controllers/budgetContoller')
 
-const url=process.env.NODE_ENV=='dev'? "http://localhost:5000":"";
+const url = process.env.NODE_ENV == 'dev' ? "http://localhost:5000" :"https://fj-be-r2-soham-sanghavi-iiitp-1.onrender.com/";
 
 const app = express();
 

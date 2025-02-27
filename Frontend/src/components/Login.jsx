@@ -28,7 +28,7 @@ const Login = () => {
 
                 // Send user data to backend
                 const backendRes = await axios.post(
-                    "http://localhost:5000/api/auth/google",
+                    "https://fj-be-r2-soham-sanghavi-iiitp-1.onrender.com/api/auth/google",
                     {
                         google_id: sub,
                         name,
@@ -55,7 +55,7 @@ const Login = () => {
         e.preventDefault();
 
         try {
-            const response = await axios.post("http://localhost:5000/api/auth/login", {
+            const response = await axios.post("https://fj-be-r2-soham-sanghavi-iiitp-1.onrender.com/api/auth/login", {
                 email,
                 password,
             });

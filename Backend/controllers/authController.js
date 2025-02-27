@@ -85,7 +85,7 @@ router.get(
     passport.authenticate("google", { failureRedirect: "/login", session: false }),
     (req, res) => {
         const token = req.user.token;
-        res.redirect(`http://localhost:5000/dashboard?token=${token}`);
+        res.redirect(`https://fj-be-r2-soham-sanghavi-iiitp-1.onrender.com/dashboard?token=${token}`);
     }
 );
 
