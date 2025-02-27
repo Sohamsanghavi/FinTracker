@@ -136,7 +136,7 @@ const createTransactionTable = async () => {
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
       updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
       CHECK (
-        (transaction_type = 'income' AND income_source_id IS NOT NULL AND expense_source_id IS NULL) OR
+        (transaction_type = 'income' AND income_source_id AND expense_source_id IS NULL) OR
         (transaction_type = 'expense' AND expense_source_id IS NOT NULL AND income_source_id IS NULL)
       )
     );

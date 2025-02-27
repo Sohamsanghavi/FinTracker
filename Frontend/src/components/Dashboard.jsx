@@ -5,7 +5,7 @@ import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } fro
 import { useNavigate } from "react-router-dom";
 import Layout from "./HomePage";
 // Configure axios defaults
-axios.defaults.baseURL = process.env.NODE_ENV == 'dev1' ? "http://localhost:5000" : "https://fj-be-r2-soham-sanghavi-iiitp-1.onrender.com";
+axios.defaults.baseURL = process.env.NODE_ENV === "development" ? "http://localhost:5000" : "https://fj-be-r2-soham-sanghavi-iiitp-1.onrender.com";
 
 const Dashboard = () => {
     const [transactions, setTransactions] = useState([]);

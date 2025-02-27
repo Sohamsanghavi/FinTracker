@@ -3,6 +3,8 @@ import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Drawer, List, ListItem, ListItemIcon, ListItemText, Button } from "@mui/material";
 import { Dashboard as DashboardIcon, AttachMoney, MoneyOff, ExitToApp } from "@mui/icons-material";
+import CallSplitOutlinedIcon from '@mui/icons-material/CallSplitOutlined';
+import WorkOutlineOutlinedIcon from '@mui/icons-material/WorkOutlineOutlined';
 
 const Sidebar = () => {
     const drawerWidth = 240;
@@ -36,12 +38,12 @@ const Sidebar = () => {
         },
         {
             text: "Budget",
-            icon: <MoneyOff />,
+            icon: <WorkOutlineOutlinedIcon />,
             path: "/budget"
         },
         {
-            text:"Split",
-            icon: <MoneyOff />,
+            text: "Split",
+            icon: <CallSplitOutlinedIcon />,
             path: "/split"
         }
     ];
