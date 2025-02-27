@@ -17,6 +17,7 @@
     "@react-oauth/google": "^0.12.1",
     "@tailwindcss/vite": "^4.0.8",
     "axios": "^1.8.1",
+    "backend": "file:..",
     "install": "^0.13.0",
     "mui": "^0.0.1",
     "npm": "^11.1.0",
