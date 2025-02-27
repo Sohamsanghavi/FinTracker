@@ -388,24 +388,24 @@ const Dashboard = () => {
                                         <option value="other">Other</option>
                                     </select>
                                 </div>
+                                <div className="mt-6 flex justify-end">
+                                    <button
+                                        type="button"
+                                        onClick={() => setIsFormOpen(false)}
+                                        className="bg-gray-300 hover:bg-gray-400 text-black font-bold py-2 px-4 rounded mr-2"
+                                    >
+                                        Cancel
+                                    </button>
+                                    <button
+                                        type="submit"
+                                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                                        disabled={isLoading}
+                                    >
+                                        {isLoading ? "Saving..." : "Save Transaction"}
+                                    </button>
+                                </div>
                             </div>
 
-                            <div className="mt-6 flex justify-end">
-                                <button
-                                    type="button"
-                                    onClick={() => setIsFormOpen(false)}
-                                    className="bg-gray-300 hover:bg-gray-400 text-black font-bold py-2 px-4 rounded mr-2"
-                                >
-                                    Cancel
-                                </button>
-                                <button
-                                    type="submit"
-                                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                                    disabled={isLoading}
-                                >
-                                    {isLoading ? "Saving..." : "Save Transaction"}
-                                </button>
-                            </div>
                         </form>
                     </div>
                 )}

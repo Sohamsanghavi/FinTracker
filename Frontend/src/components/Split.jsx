@@ -32,7 +32,7 @@ const SplitExpenseManager = () => {
 
                 // Filter out current user from users list
                 console.log(usersRes);
-                setUsers(usersRes.data.filter(user => user.id !== currentUserId));
+                setUsers(usersRes.data.filter(user => user.id != currentUserId));
                 setCategories(categoriesRes.data);
                 setOwedSplits(owedRes.data);
                 setMadeSplits(madeRes.data);
@@ -181,16 +181,6 @@ const SplitExpenseManager = () => {
                                             <td>{getUserName(split.split_to_user_id)}</td>
                                             <td>${parseFloat(split.amount).toFixed(2)}</td>
                                             <td>{split.is_settled ? 'Paid' : 'Unpaid'}</td>
-                                            <td>
-                                                {!split.is_settled && (
-                                                    <button
-                                                        className="remind-btn"
-                                                        onClick={() => alert(`Reminder functionality would go here`)}
-                                                    >
-                                                        Remind
-                                                    </button>
-                                                )}
-                                            </td>
                                         </tr>
                                     ))}
                                 </tbody>
