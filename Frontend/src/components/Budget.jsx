@@ -20,7 +20,7 @@ export default function BudgetPage({ userId }) {
     const fetchBudgets = async () => {
         try {
             const response = await axios.get(`/api/budget/${user}`);
-            console.log(response.data.budgets);
+            // console.log(response.data.budgets);
             setBudgets(response.data.budgets);
         } catch (error) {
             console.error("Error fetching budgets:", error);
@@ -43,12 +43,12 @@ export default function BudgetPage({ userId }) {
         if (emailSent) return; // Prevent multiple emails
 
         const overBudget = budgets.find((b) => parseFloat(b.spent) > parseFloat(b.budget_amount));
-        console.log("over", overBudget);
+        // console.log("over", overBudget);
         if (overBudget) {
             try {
                 await axios.post("/api/budget/notify", { user_id: user, category: overBudget.category });
                 setEmailSent(true);
-                console.log("Budget overrun email sent!");
+                // console.log("Budget overrun email sent!");
             } catch (error) {
                 console.error("Error sending budget notification:", error);
             }

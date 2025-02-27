@@ -11,10 +11,12 @@ const Login = () => {
     const [message, setMessage] = useState("");
     const navigate = useNavigate();
 
+    const url = process.env.NODE_ENV === "development" ? "http://localhost:5000" : "https://fj-be-r2-soham-sanghavi-iiitp-1.onrender.com";
+
     const login = useGoogleLogin({
         onSuccess: async (tokenResponse) => {
             try {
-                console.log("hello");
+                // console.log("hello");
 
                 // Fetch user info from Google API
                 const res = await axios.get(
@@ -28,7 +30,7 @@ const Login = () => {
 
                 // Send user data to backend
                 const backendRes = await axios.post(
-                    "http://localhost:5000/api/auth/google",
+                    `${url}/api/auth/google`,
                     {
                         google_id: sub,
                         name,
@@ -55,7 +57,7 @@ const Login = () => {
         e.preventDefault();
 
         try {
-            const response = await axios.post("http://localhost:5000/api/auth/login", {
+            const response = await axios.post(`${url}/api/auth/login`, {
                 email,
                 password,
             });

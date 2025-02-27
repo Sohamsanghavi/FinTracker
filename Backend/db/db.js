@@ -18,7 +18,7 @@ const createUserTable = async () => {
       google_id VARCHAR(255),
       name VARCHAR(100) NOT NULL,
       email VARCHAR(100) UNIQUE NOT NULL,
-      password VARCHAR(255) NOT NULL,
+      password VARCHAR(255),
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     );
   `;
@@ -96,6 +96,27 @@ const createBudgetTable = async () => {
     }
 };
 
+const createSplitExpenseTable = async () => {
+    const query = `
+    CREATE TABLE IF NOT EXISTS split_expenses (
+      split_id SERIAL PRIMARY KEY,
+      split_from_user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      split_to_user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      amount DECIMAL(12,2) NOT NULL,
+      is_settled BOOLEAN DEFAULT FALSE,
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
+  `;
+
+    try {
+        await pool.query(query);
+        console.log("✅ SplitExpense table created successfully!");
+    } catch (error) {
+        console.error("❌ Error creating SplitExpense table:", error);
+    }
+};
+
+
 
 // Create Transaction Table
 const createTransactionTable = async () => {
@@ -115,7 +136,7 @@ const createTransactionTable = async () => {
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
       updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
       CHECK (
-        (transaction_type = 'income' AND income_source_id IS NOT NULL AND expense_source_id IS NULL) OR
+        (transaction_type = 'income' AND income_source_id AND expense_source_id IS NULL) OR
         (transaction_type = 'expense' AND expense_source_id IS NOT NULL AND income_source_id IS NULL)
       )
     );
@@ -136,5 +157,6 @@ createExpenseSourceTable();
 createTransactionTable();
 createTransactionTable();
 createBudgetTable();
+createSplitExpenseTable();
 
 module.exports = pool;
