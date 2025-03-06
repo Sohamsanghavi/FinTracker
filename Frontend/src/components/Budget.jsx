@@ -21,10 +21,10 @@ export default function BudgetPage({ userId }) {
     const fetchBudgets = async () => {
         try {
             const response = await axios.get(`/api/budget/${user}`);
-            const res = axios.get(`/api/splits/categories?userId=${user}`);
+            const res = await axios.get(`/api/splits/categories?userId=${user}`);
             // console.log(response.data.budgets);
             setBudgets(response.data.budgets);
-            setCategory(res.data);
+            setCategory(res.data || []);
             console.log(res.data);
         } catch (error) {
             console.error("Error fetching budgets:", error);
