@@ -8,7 +8,7 @@ require('dotenv').config();
 const router = express.Router();
 const JWT_SECRET = process.env.JWT_SECRET;
 // const url = process.env.NODE_ENV == 'development' ? "http://localhost:5000" : "https://fj-be-r2-soham-sanghavi-iiitp-1.onrender.com";
-const url = "http://localhost:5000";
+const url = process.env.URL;
 
 // Register User
 router.post('/register', async (req, res) => {

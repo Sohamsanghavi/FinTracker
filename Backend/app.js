@@ -16,7 +16,7 @@ const budgetRoutes = require('./controllers/budgetContoller');
 const splitRoutes = require('./controllers/splitController');
 
 // const url = process.env.NODE_ENV === "development" ? "http://localhost:5000" :"https://fj-be-r2-soham-sanghavi-iiitp-1.onrender.com";
-const url = "http://localhost:5000";
+const url = process.env.URL;
 
 const app = express();
 
