@@ -24,6 +24,7 @@ router.get('/income-sources', async (req, res) => {
 // Get all expense sources
 router.get('/expense-sources', async (req, res) => {
     try {
+        
         const userId = req.query.user; 
         const query = `
             SELECT id, name, description, category
@@ -43,8 +44,10 @@ router.get('/expense-sources', async (req, res) => {
 
 router.post('/income-sources', async (req, res) => {
     try {
-        const { userId,name, description } = req.body;
-        console.log(userId, name, description);
+        const { user,name, description } = req.body;
+        console.log(user
+            .00000000000000000000000000000000000000
+            , name, description);
 
         if (!name) {
             return res.status(400).json({ error: 'Name is required' });
@@ -56,7 +59,7 @@ router.post('/income-sources', async (req, res) => {
              RETURNING id, name, description`
             ;
 
-        const result = await pool.query(query, [userId, name, description]);
+        const result = await pool.query(query, [user, name, description]);
         res.status(201).json(result.rows[0]);
     } catch (error) {
         console.error('Error adding income source:', error);
@@ -66,7 +69,7 @@ router.post('/income-sources', async (req, res) => {
 
 router.post('/expense-sources', async (req, res) => {
     try {
-        const { userId,name, description, category } = req.body;
+        const { user,name, description, category } = req.body;
 
         if (!name) {
             return res.status(400).json({ error: 'Name is required' });
@@ -78,7 +81,7 @@ router.post('/expense-sources', async (req, res) => {
              RETURNING id, name, description, category`
             ;
 
-        const result = await pool.query(query, [userId, name, description, category]);
+        const result = await pool.query(query, [user, name, description, category]);
         res.status(201).json(result.rows[0]);
     } catch (error) {
         console.error('Error adding expense source:', error);
