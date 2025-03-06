@@ -13,7 +13,7 @@ router.post("/split-expense", async (req, res) => {
 
         const result = await pool.query(
             `INSERT INTO split_expenses (split_from_user_id, split_to_user_id, amount, is_settled) 
-       VALUES ($1, $2, $3, FALSE) RETURNING *`,
+             VALUES ($1, $2, $3, FALSE) RETURNING *`,
             [fromUserId, toUserId, amount]
         );
 
@@ -58,13 +58,13 @@ router.post("/settle-expense", async (req, res) => {
 
         await pool.query(
             `INSERT INTO transactions (user_id, amount, transaction_type, expense_source_id, transaction_date, description) 
-       VALUES ($1, $2, 'expense', $3, NOW(), $4)`,
+              VALUES ($1, $2, 'expense', $3, NOW(), $4)`,
             [split_to_user_id, amount, expenseSourceId, `Settled with User ${split_from_user_id}`]
         );
 
         await pool.query(
             `INSERT INTO transactions (user_id, amount, transaction_type, transaction_date, description) 
-       VALUES ($1, $2, 'income', NOW(), $3)`,
+             VALUES ($1, $2, 'income', NOW(), $3)`,
             [split_from_user_id, amount, `Settled amount recived from User ${split_to_user_id}`]
         );
 

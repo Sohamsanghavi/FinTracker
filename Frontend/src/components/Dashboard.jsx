@@ -5,8 +5,9 @@ import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } fro
 import { useNavigate } from "react-router-dom";
 import Layout from "./HomePage";
 // Configure axios defaults
-axios.defaults.baseURL = process.env.NODE_ENV === "development" ? "http://localhost:5000" : "https://fj-be-r2-soham-sanghavi-iiitp-1.onrender.com";
-
+// axios.defaults.baseURL = process.env.NODE_ENV === "development" ? "http://localhost:5000" : "https://fj-be-r2-soham-sanghavi-iiitp-1.onrender.com";
+axios.defaults.baseURL = "http://localhost:5000";
+// 
 const Dashboard = () => {
     const [transactions, setTransactions] = useState([]);
     const [income, setIncome] = useState(0);
@@ -244,7 +245,10 @@ const Dashboard = () => {
 
                 {isFormOpen && (
                     <div className="bg-white p-6 rounded-lg shadow-md mb-6">
-                        <h2 className="text-xl font-bold mb-4">Add New Transaction</h2>
+                        <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold mb-4">
+                            Add New Transaction
+                        </h2>
+
                         <form onSubmit={handleSubmit}>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>

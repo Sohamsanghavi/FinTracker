@@ -15,7 +15,8 @@ const summaryRoutes = require('./controllers/summaryController');
 const budgetRoutes = require('./controllers/budgetContoller');
 const splitRoutes = require('./controllers/splitController');
 
-const url = process.env.NODE_ENV === "development" ? "http://localhost:5000" :"https://fj-be-r2-soham-sanghavi-iiitp-1.onrender.com";
+// const url = process.env.NODE_ENV === "development" ? "http://localhost:5000" :"https://fj-be-r2-soham-sanghavi-iiitp-1.onrender.com";
+const url = "http://localhost:5000";
 
 const app = express();
 
@@ -37,7 +38,6 @@ const PORT = process.env.PORT;
 app.use(express.json());
 // app.use(cors({ origin: "http://localhost:5173" }));
 
-// Mount routes
 app.use('/api/auth', authRoutes);
 app.use('/api/transactions', transactionRoutes);
 app.use('/api/source', sourceRoutes);
