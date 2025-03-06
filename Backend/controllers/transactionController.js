@@ -13,11 +13,11 @@ router.get('/', async (req, res) => {
 
         let query = `
             SELECT t.id, t.amount, t.transaction_type AS type, t.transaction_date AS date, 
-                   t.description, t.payment_method,
-                   CASE 
-                       WHEN t.transaction_type = 'income' THEN income_sources.name 
-                       WHEN t.transaction_type = 'expense' THEN expense_sources.name 
-                   END AS source_name
+            t.description, t.payment_method,
+            CASE 
+                WHEN t.transaction_type = 'income' THEN income_sources.name 
+                WHEN t.transaction_type = 'expense' THEN expense_sources.name 
+            END AS source_name
             FROM transactions t
             LEFT JOIN income_sources ON t.income_source_id = income_sources.id
             LEFT JOIN expense_sources ON t.expense_source_id = expense_sources.id
@@ -58,7 +58,7 @@ router.post('/', async (req, res) => {
 
         const query = `
             INSERT INTO transactions (user_id, amount, transaction_type, income_source_id, 
-                                     expense_source_id, transaction_date, description, payment_method)
+            expense_source_id, transaction_date, description, payment_method)
             VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
             RETURNING id
         `;

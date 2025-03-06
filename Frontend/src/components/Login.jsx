@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { Link, Navigate } from "react-router-dom";
 import { useGoogleLogin } from "@react-oauth/google";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";     
 
 
 const Login = () => {
@@ -11,7 +11,8 @@ const Login = () => {
     const [message, setMessage] = useState("");
     const navigate = useNavigate();
 
-    const url = process.env.NODE_ENV === "development" ? "http://localhost:5000" : "https://fj-be-r2-soham-sanghavi-iiitp-1.onrender.com";
+    // const url = process.env.NODE_ENV === "development" ? "http://localhost:5000" : "https://fj-be-r2-soham-sanghavi-iiitp-1.onrender.com";
+    const url = "https://fj-be-r2-soham-sanghavi-iiitp-1.onrender.com";
 
     const login = useGoogleLogin({
         onSuccess: async (tokenResponse) => {

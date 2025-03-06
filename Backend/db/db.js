@@ -8,9 +8,6 @@ const pool = new Pool({
     },
 });
 
-// pool.on('connect', () => {
-//     console.log('Connected to the PostgreSQL database on Render');
-// });
 const createUserTable = async () => {
     const query = `
     CREATE TABLE IF NOT EXISTS users (
@@ -25,9 +22,9 @@ const createUserTable = async () => {
 
     try {
         await pool.query(query);
-        console.log("✅ User table created successfully!");
+        console.log("  User table created successfully!");
     } catch (error) {
-        console.error("❌ Error creating User table:", error);
+        console.error("  Error creating User table:", error);
     }
 };
 
@@ -47,9 +44,9 @@ const createIncomeSourceTable = async () => {
 
     try {
         await pool.query(query);
-        console.log("✅ Income Source table created successfully!");
+        console.log("  Income Source table created successfully!");
     } catch (error) {
-        console.error("❌ Error creating Income Source table:", error);
+        console.error("  Error creating Income Source table:", error);
     }
 };
 
@@ -70,9 +67,9 @@ const createExpenseSourceTable = async () => {
 
     try {
         await pool.query(query);
-        console.log("✅ Expense Source table created successfully!");
+        console.log("  Expense Source table created successfully!");
     } catch (error) {
-        console.error("❌ Error creating Expense Source table:", error);
+        console.error("  Error creating Expense Source table:", error);
     }
 };
 const createBudgetTable = async () => {
@@ -90,9 +87,9 @@ const createBudgetTable = async () => {
 
     try {
         await pool.query(query);
-        console.log("✅ Budget table created successfully!");
+        console.log("  Budget table created successfully!");
     } catch (error) {
-        console.error("❌ Error creating Budget table:", error);
+        console.error("  Error creating Budget table:", error);
     }
 };
 
@@ -110,9 +107,9 @@ const createSplitExpenseTable = async () => {
 
     try {
         await pool.query(query);
-        console.log("✅ SplitExpense table created successfully!");
+        console.log("  SplitExpense table created successfully!");
     } catch (error) {
-        console.error("❌ Error creating SplitExpense table:", error);
+        console.error("  Error creating SplitExpense table:", error);
     }
 };
 
@@ -144,9 +141,9 @@ const createTransactionTable = async () => {
 
     try {
         await pool.query(query);
-        console.log("✅ Transaction table created successfully!");
+        console.log("  Transaction table created successfully!");
     } catch (error) {
-        console.error("❌ Error creating Transaction table:", error);
+        console.error("  Error creating Transaction table:", error);
     }
 };
 
