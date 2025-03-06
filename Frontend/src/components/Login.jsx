@@ -12,7 +12,7 @@ const Login = () => {
     const navigate = useNavigate();
 
     // const url = process.env.NODE_ENV === "development" ? "http://localhost:5000" : "https://fj-be-r2-soham-sanghavi-iiitp-1.onrender.com";
-    const url = "https://fj-be-r2-soham-sanghavi-iiitp-1.onrender.com";
+    const url = "https://fintracker-he1z.onrender.com";
 
     const login = useGoogleLogin({
         onSuccess: async (tokenResponse) => {
