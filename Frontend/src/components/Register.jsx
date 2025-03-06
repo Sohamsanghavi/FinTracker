@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 // const url = process.env.NODE_ENV === "development" ? "http://localhost:5000" : "https://fj-be-r2-soham-sanghavi-iiitp-1.onrender.com";
-const url = "https://fj-be-r2-soham-sanghavi-iiitp-1.onrender.com";
+const url = "https://fintracker-he1z.onrender.com";
 
 const Register = () => {
     const [name, setName] = useState("");
