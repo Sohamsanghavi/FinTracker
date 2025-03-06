@@ -4,7 +4,7 @@ import Layout from "./HomePage";
 
 export default function BudgetPage({ userId }) {
     const [budgets, setBudgets] = useState([]);
-    const [category, setCategory] = useState("");
+    const [category, setCategory] = useState([]);
     const [amount, setAmount] = useState("");
     const [user, setUser] = useState(localStorage.getItem("user"));
     const [selectedCategory, setSelectedCategory] = useState('');
