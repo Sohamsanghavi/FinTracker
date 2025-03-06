@@ -34,7 +34,7 @@ export default function BudgetPage({ userId }) {
     const handleSetBudget = async () => {
         if (!selectedCategory || !amount) return;
         try {
-            await axios.post("/api/budget", { user_id: user, selectedCategory, amount });
+            await axios.post("/api/budget", { user_id: user, category: selectedCategory, amount: amount });
 
             fetchBudgets();
             setSelectedCategory("");
