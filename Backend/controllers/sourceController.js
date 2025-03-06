@@ -45,9 +45,7 @@ router.get('/expense-sources', async (req, res) => {
 router.post('/income-sources', async (req, res) => {
     try {
         const { user,name, description } = req.body;
-        console.log(user
-            .00000000000000000000000000000000000000
-            , name, description);
+        console.log(user, name, description);
 
         if (!name) {
             return res.status(400).json({ error: 'Name is required' });
