@@ -7,6 +7,7 @@ export default function BudgetPage({ userId }) {
     const [category, setCategory] = useState("");
     const [amount, setAmount] = useState("");
     const [user, setUser] = useState(localStorage.getItem("user"));
+    const [selectedCategory, setSelectedCategory] = useState('');
     const [emailSent, setEmailSent] = useState(false);
 
     useEffect(() => {
@@ -20,19 +21,22 @@ export default function BudgetPage({ userId }) {
     const fetchBudgets = async () => {
         try {
             const response = await axios.get(`/api/budget/${user}`);
+            const res = axios.get(`/api/splits/categories?userId=${user}`);
             // console.log(response.data.budgets);
             setBudgets(response.data.budgets);
+            setCategory(res.data);
         } catch (error) {
             console.error("Error fetching budgets:", error);
         }
     };
 
     const handleSetBudget = async () => {
-        if (!category || !amount) return;
+        if (!selectedCategory || !amount) return;
         try {
-            await axios.post("/api/budget", { user_id: user, category, amount });
+            await axios.post("/api/budget", { user_id: user, selectedCategory, amount });
+
             fetchBudgets();
-            setCategory("");
+            setSelectedCategory("");
             setAmount("");
         } catch (error) {
             console.error("Error setting budget:", error);
@@ -62,13 +66,20 @@ export default function BudgetPage({ userId }) {
 
                 {/* Set Budget Form */}
                 <div className="mb-6">
-                    <input
-                        type="text"
-                        placeholder="Category"
-                        value={category}
-                        onChange={(e) => setCategory(e.target.value)}
-                        className="border p-2 mr-2"
-                    />
+                    <label>Category:</label>
+                    <select
+                        value={selectedCategory}
+                        onChange={(e) => setSelectedCategory(e.target.value)}
+                        required
+                    >
+                        <option value="">Select Category</option>
+                        {category.map(category => (
+                            <option key={category.id} value={category.name}>
+                                {category.name}
+                            </option>
+                        ))}
+                    </select>
+                    <label>Amount:</label>
                     <input
                         type="number"
                         placeholder="Amount"
