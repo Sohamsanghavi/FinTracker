@@ -25,6 +25,7 @@ export default function BudgetPage({ userId }) {
             // console.log(response.data.budgets);
             setBudgets(response.data.budgets);
             setCategory(res.data);
+            console.log(res.data);
         } catch (error) {
             console.error("Error fetching budgets:", error);
         }
@@ -73,9 +74,9 @@ export default function BudgetPage({ userId }) {
                         required
                     >
                         <option value="">Select Category</option>
-                        {category.map(category => (
-                            <option key={category.id} value={category.name}>
-                                {category.name}
+                        {category.map(cat => (
+                            <option key={cat.id} value={cat.name}>
+                                {cat.name}
                             </option>
                         ))}
                     </select>
